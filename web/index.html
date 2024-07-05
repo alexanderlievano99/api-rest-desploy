@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API REST</title>
+    <style>
+        article{
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        img{
+            height: auto;
+            width: 320px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <main></main>
+    <script>
+        fetch('http://localhost:1234/movies')
+        .then(res => res.json())
+        .then(movies =>{
+           const html = movies.map(movie =>{
+            console.log(movie)
+                return `
+                    <article>
+                        <h2> ${movie.Title}<h2>
+                            <img src =${movie.Images[0]} alt="${movie.Title}">
+                        <p>${movie.Released}
+                    </article>      
+                `;
+           }).join('')
+
+           document.querySelector('main').innerHTML = html;
+        })
+    </script>
+</body>
+</html>
